@@ -14,7 +14,7 @@ const Component = () => {
 
   const links = [
     { name: 'Home', path: '/' },
-    { name: 'Users', path: '/users' },
+    { name: 'Products', path: '/products' },
   ];
 
   const navLinks = links.map((link) => {
@@ -30,7 +30,7 @@ const Component = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="px-3">
       <Link href="/" passHref legacyBehavior>
-        <Navbar.Brand>Brand</Navbar.Brand>
+        <Navbar.Brand>Store Data</Navbar.Brand>
       </Link>
 
       <Navbar.Toggle aria-controls="navbar-top" />

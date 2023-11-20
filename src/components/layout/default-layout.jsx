@@ -1,11 +1,11 @@
-import NavbarTop from '@/components/layout/navbar-top';
+import Navbar from '@/components/layout/navbar-top';
 import Footer from '@/components/layout/footer';
 
 const Component = ({ children }) => {
   return (
     <div className="d-flex flex-column min-vh-100">
       <header>
-        <NavbarTop />
+        <Navbar />
       </header>
 
       <main className="container">

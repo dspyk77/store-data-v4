@@ -4,41 +4,41 @@ import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 
 function Page() {
-  const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch('/api/users', {
+    const fetchProducts = async () => {
+      const response = await fetch('/api/products', {
         method: 'GET'
       });
 
       if (response.ok) {
-        const users = await response.json();
-        console.log(`Users: ${JSON.stringify(users)}`);
-        setUsers(users);
+        const products = await response.json();
+        console.log(`Products: ${JSON.stringify(products)}`);
+        setProducts(products);
       } else {
         console.error(response);
       }
     };
 
-    fetchUsers();
+    fetchProducts();
   }, []);
 
-  // function deleteuser(prevusers, id) {
-  //   prevusers.filter((user) => user.id !== id);
+  // function deleteproduct(prevproducts, id) {
+  //   prevproducts.filter((product) => product.id !== id);
   // }
 
   const handleDelete = async (id) => {
     const confirmation = window.confirm('Are you sure you want to delete this?');
 
     if (confirmation) {
-      const response = await fetch(`/api/users/${id}`, {
+      const response = await fetch(`/api/products/${id}`, {
         method: 'DELETE'
       });
 
       if (response.ok) {
-        setUsers((prevusers) =>
-          prevusers.filter((user) => user.id !== id)
+        setProducts((prevproducts) =>
+          prevproducts.filter((product) => product.id !== id)
         );
       } else {
         console.error(response);
@@ -47,22 +47,22 @@ function Page() {
   };
 
   const rows = [];
-  for (let user of users) {
-    const key = `${user.id}`;
+  for (let product of products) {
+    const key = `${product.id}`;
 
     const row = (
       <tr key={key}>
-        <td>{user.id}</td>
-        <td>{user.firstName}</td>
-        <td>{user.lastName}</td>
-        <td>{user.age}</td>
-        <td>{user.weight}</td>
+        <td>{product.id}</td>
+        <td>{product.firstName}</td>
+        <td>{product.lastName}</td>
+        <td>{product.age}</td>
+        <td>{product.weight}</td>
         <td>
-          <Link href={`/users/${user.id}`}>Show</Link>
+          <Link href={`/products/${product.id}`}>Show</Link>
           <span> | </span>
-          <Link href={`/users/${user.id}/edit`}>Edit</Link>
+          <Link href={`/products/${product.id}/edit`}>Edit</Link>
           <span> | </span>
-          <Link href="" onClick={() => handleDelete(user.id)}>Delete</Link>
+          <Link href="" onClick={() => handleDelete(product.id)}>Delete</Link>
         </td>
       </tr>
     );
@@ -72,9 +72,9 @@ function Page() {
 
   return (
     <>
-      <h1 className="my-4 text-2xl">Users</h1>
+      <h1 className="my-4 text-2xl">Products</h1>
 
-      <Button variant="primary" href="users/new">Create</Button>
+      <Button variant="primary" href="products/new">Create</Button>
 
       <Table responsive="md" variant='dark' striped hover className="mt-3">
         <thead>

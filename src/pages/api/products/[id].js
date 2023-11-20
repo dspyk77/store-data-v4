@@ -2,7 +2,7 @@ import { getDbConnection } from '@/data/db-connection';
 
 async function handler(req, res) {
   const { id } = req.query;
-  console.log(`[${req.method}] [Users] ${id}`);
+  console.log(`[${req.method}] [Products] ${id}`);
 
   const dbConnection = await getDbConnection();
 
@@ -10,38 +10,38 @@ async function handler(req, res) {
   case 'GET':
     var results = await dbConnection.execute(`
       SELECT *
-      FROM users
+      FROM products
       WHERE id = ${id}
     `);
 
-    var user = results[0][0];
+    var product = results[0][0];
 
-    console.log(user);
-    res.status(200).json(user);
+    console.log(product);
+    res.status(200).json(product);
     break;
 
   case 'PUT':
-    var user = req.body;
-    console.log(user);
+    var product = req.body;
+    console.log(product);
 
     var sql = `
-      UPDATE users
-      SET firstName = ?,
-          lastName = ?,
-          age = ?,
+      UPDATE products
+      SET name = ?,
+          category = ?,
+          price = ?,
           weight = ?
       WHERE id = ?
     `;
-    var values = [user.firstName, user.lastName, user.age, user.weight, id];
+    var values = [product.name, product.category, product.price, product.weight, id];
 
     await dbConnection.execute(sql, values);
 
-    res.status(200).json(user);
+    res.status(200).json(product);
     break;
 
   case 'DELETE':
     var sql = `
-      DELETE FROM users
+      DELETE FROM products
       WHERE id = ?
     `;
 

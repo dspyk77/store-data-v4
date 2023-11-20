@@ -4,12 +4,12 @@ CREATE DATABASE myDatabase;
 
 USE myDatabase;
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS products;
 
-CREATE TABLE users (
+CREATE TABLE products (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  firstName VARCHAR(255),
-  lastName VARCHAR(255),
-  age INT,
+  name VARCHAR(255),
+  category VARCHAR(255),
+  price DECIMAL(5,2),
   weight DECIMAL(5,2)
 );

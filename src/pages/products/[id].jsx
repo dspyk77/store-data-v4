@@ -5,14 +5,14 @@ import Link from 'next/link';
 import Spacer from '@/components/spacer';
 
 function Page() {
-  const [user, setUser] = useState({});
+  const [product, setProduct] = useState({});
 
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetch(`/api/users/${id}`, {
+    const fetchProduct = async () => {
+      const response = await fetch(`/api/products/${id}`, {
         method: 'GET',
       });
 
@@ -20,66 +20,66 @@ function Page() {
 
       if (response.ok) {
         // console.log(await response.text());
-        const userData = await response.json();
+        const productData = await response.json();
 
-        setUser(userData);
+        setProduct(productData);
       } else {
         console.error(response);
       }
     };
 
-    fetchUser();
+    fetchProduct();
   }, [id]);
 
   const handleDelete = async () => {
     const confirmation = window.confirm('Are you sure you sure ?');
 
     if (confirmation) {
-      const response = await fetch(`/api/users/${id}`, {
+      const response = await fetch(`/api/products/${id}`, {
         method: 'DELETE'
       });
 
       if (response.ok) {
-        router.push('/users');
+        router.push('/products');
       } else {
         console.error(response);
       }
     }
   };
 
-  if (user == null) return;
+  if (product == null) return;
 
   return (
     <>
-      <h1>User</h1>
+      <h1>Product</h1>
 
-      <Link variant="dark" className="me-auto" href="/users">Back</Link>
+      <Link variant="dark" className="me-auto" href="/products">Back</Link>
 
       <Spacer />
 
       <div>
-        <Link href={`/users/${id}/edit`}>Edit</Link>
+        <Link href={`/products/${id}/edit`}>Edit</Link>
         <span> | </span>
-        <Link href="" onClick={() => handleDelete(user.id)}>Delete</Link>
+        <Link href="" onClick={() => handleDelete(product.id)}>Delete</Link>
       </div>
 
       <Table variant='dark' size="md" responsive striped hover className="show-table">
         <tbody>
           <tr>
-            <th>First Name</th>
-            <td>{user.firstName}</td>
+            <th>Name</th>
+            <td>{product.name}</td>
           </tr>
           <tr>
-            <th>Last Name</th>
-            <td>{user.lastName}</td>
+            <th>Category</th>
+            <td>{product.category}</td>
           </tr>
           <tr>
-            <th>Age</th>
-            <td>{user.age}</td>
+            <th>Price</th>
+            <td>{product.price}</td>
           </tr>
           <tr>
             <th>Weight</th>
-            <td>{user.weight}</td>
+            <td>{product.weight}</td>
           </tr>
         </tbody>
       </Table>
