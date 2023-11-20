@@ -53,9 +53,9 @@ function Page() {
     const row = (
       <tr key={key}>
         <td>{product.id}</td>
-        <td>{product.firstName}</td>
-        <td>{product.lastName}</td>
-        <td>{product.age}</td>
+        <td>{product.name}</td>
+        <td>{product.category}</td>
+        <td>{product.price}</td>
         <td>{product.weight}</td>
         <td>
           <Link href={`/products/${product.id}`}>Show</Link>
@@ -80,9 +80,9 @@ function Page() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
             <th>Weight</th>
             <th></th>
           </tr>
